@@ -1,4 +1,4 @@
-
+/* in this game ,obsacles are randomly generated and the player should prevent collision with them by moving to left or right*/
 
 import java.util.Vector;
 
@@ -52,7 +52,7 @@ void draw() {
             ellipse(playerPosition.x, playerPosition.y , playerDimention.x, playerDimention.y );
       }
       
-    public boolean collisionDetected ( Obstacle gameObstacle ) ////////////////cheeeeeeeeeeeeeeckkkkkkkkk
+    public boolean collisionDetected ( Obstacle gameObstacle ) // detect the collosion between player and obstacle
       {  
           
 
@@ -115,7 +115,7 @@ public class Obstacle  {
         this.createBlockShape();// Create a new block one pixel lower than its previous location
     }
 
-    public void createBlockShape() //private   !!!!!!
+    public void createBlockShape() 
     {
         this.myShape = createShape(RECT, this.topLeftCorner.x, this.topLeftCorner.y, obstacleWidth, obstacleHeight);
     }
@@ -177,34 +177,34 @@ public class GameMap {
               float newBlockBottomRightCornerX = random(blockWidth, width);//each time a random width for block
               float newBlockHeight = random(100, 500);
               generateBlock(new PVector(newBlockBottomRightCornerX, newBlockBottomRightCornerY), blockWidth,newBlockHeight);
-              minY= newBlockBottomRightCornerY-newBlockHeight;//?????????????
+              minY= newBlockBottomRightCornerY-newBlockHeight;
 
           }
 
         else { 
               
               mapShape.translate(0, 1);//shift down the game map 1 pixel 
-              for ( int i=0; i<  obstacles.size(); i++) {  //(Obstacle obstacle : obstacles)    !!!!
+              for ( int i=0; i<  obstacles.size(); i++) {  
                     tempObstacle=obstacles.get(i);
-                    obstacles.get(i).moveDown();                              //????????????????
-                    //tempObstacle.moveDown();  // obstacle.moveDown();        ????????????????
+                    obstacles.get(i).moveDown();                              
+                    
                    
-                    if(tempObstacle.topLeftCorner.y > height) {  //(obstacle.topLeftCorner.y > height)  !!!!
-                        obstacles.remove(i); // obstacles.remove(obstacle);  !!!
+                    if(tempObstacle.topLeftCorner.y > height) { 
+                        obstacles.remove(i); 
                         mapShape.removeChild(i);
                        }
 
                     if(minY == 0) {
-                         minY = tempObstacle.topLeftCorner.y;  //minY = obstacle.topLeftCorner.y; !!!
+                         minY = tempObstacle.topLeftCorner.y;  
                           } 
-                    else if(tempObstacle.topLeftCorner.y < minY)  { // (obstacle.topLeftCorner.y < minY) !!!
-                          minY =  tempObstacle.topLeftCorner.y; //minY =obstacle.topLeftCorner.y; // replace the top left corner of the top most block 
+                    else if(tempObstacle.topLeftCorner.y < minY)  { 
+                          minY =  tempObstacle.topLeftCorner.y; 
                        }
                }//end for
 
              if(minY > blockBoundary.y) {
                   // generate a new block at a random position
-                  float newBlockBottomRightCornerY =  random( minY - blockBoundary.y - height, minY - blockBoundary.y );//??random( minY - blockBoundary.y, minY - blockBoundary.y - height);//!!!!!!!!! random( 0, minY - blockBoundary.y);
+                  float newBlockBottomRightCornerY =  random( minY - blockBoundary.y - height, minY - blockBoundary.y );
                   float newBlockBottomRightCornerX = random(blockWidth, width);//each time a random width for block
                   float newBlockHeight = random(100, 500);
                   generateBlock(new PVector(newBlockBottomRightCornerX, newBlockBottomRightCornerY), blockWidth,newBlockHeight);
